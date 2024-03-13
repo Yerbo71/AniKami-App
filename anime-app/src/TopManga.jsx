@@ -16,14 +16,12 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import SidebarWithHeader from "./components/SideBar";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 const TopManga = () => {
   const [animeData, setAnimeData] = useState(null);
   const [selectedAnime, setSelectedAnime] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const token = localStorage.getItem("accessToken");
 
   const handleCardClick = (anime) => {
     setSelectedAnime(anime);
@@ -52,18 +50,13 @@ const TopManga = () => {
     getData();
   }, []);
 
-  const sliderSettings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-  };
 
   return (
     <SidebarWithHeader>
-        <Box marginLeft={"30px"} marginRight={"30px"} padding={"0px 80px"}>
-        <Text color={"#3DD2CC"} fontSize={30} marginBottom={5}>TOP MANGA</Text>
-        <Slider {...sliderSettings}>
+      {token ?
+        <Flex width="100%" justifyContent="center" alignItems="center" flexWrap="wrap" textAlign="center" gap="10px">
+        <Text color={"#3DD2CC"} fontSize={30} marginBottom={5} width="100%">TOP MANGA</Text>
+
         {animeData ? (
           animeData.map((anime, index) => (
             <Box key={index}>
@@ -118,8 +111,6 @@ const TopManga = () => {
         ) : (
           <Spinner color="#3DD2CC" />
         )}
-      </Slider>
-
       {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={closeModal} size="3xl">
         <ModalOverlay />
@@ -172,7 +163,9 @@ const TopManga = () => {
         </ModalContent>
       </Modal>
 
-     </Box>
+     </Flex> :
+          <>You dont have token !!!</>}
+
     </SidebarWithHeader>
   );
 };

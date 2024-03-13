@@ -20,23 +20,24 @@ const AppProvider = ({children}) => {
         </AppContext.Provider>
     )
 }
+
+
 function App () {
     return(
         <>
             <AppProvider>
                 <Routes>
-                        <Route path="/" element={<Login/>}/>
-                        <Route path="/register" element={<Register/>}/>
-                        <Route path="/anime" element={<Anime/>}/>
-                        <Route path="/anime/:id" element={<PageAnime/>}/>
-                        <Route path="/topAnime" element={<Popular/>}/>
-                        <Route path="/topManga" element={<TopManga/>}/>
-                        <Route path="/collection" element={<Collection/>}/>
-                        <Route path="/side" element={<SidebarWithHeader/>}/>
+                    <Route path="/" element={<Login/>}/>
+                    <Route path="/register" element={<Register/>}/>
+                    <Route path="/anime" element={<Anime/>}/>
+                    <Route path="/anime/:id" element={<PageAnime/>}/>
+                    <Route path="/topAnime" element={<Popular/>}/>
+                    <Route path="/topManga" element={<TopManga/>}/>
+                    <Route path="/collection" element={<Collection/>}/>
+                    <Route path="/side" element={<SidebarWithHeader/>}/>
                 </Routes>
             </AppProvider>
         </>
-
     );
 
 }

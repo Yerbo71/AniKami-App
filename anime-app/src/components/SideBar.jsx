@@ -38,7 +38,6 @@ import {
     FiTrash } from "react-icons/fi"
 
 import { FaBook, FaFire } from "react-icons/fa";
-import { GrSchedule } from "react-icons/gr";
 import { BsCollectionFill } from "react-icons/bs";
 import { jwtDecode } from "jwt-decode";
 

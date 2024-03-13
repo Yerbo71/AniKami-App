@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { Link } from "react-router-dom";
-import axios from "axios"; // Don't forget to import axios
+import axios from "axios";
 import "./Register.css";
 
 function validateEmail(value) {
@@ -31,22 +31,28 @@ function validateName(value) {
 }
 
 export default function Register() {
+  const [messIsSuccess, setMessIsSuccess] = useState(false);
+  
   const getRegistration = async (values) => {
     try {
       const res = await axios.post("http://localhost:8080/api/v1/auth/register", values);
+      setMessIsSuccess(true);
       console.log("Registration success: ", res);
     } catch (e) {
       console.log("Registration failed: ", e);
     }
   };
-//   useEffect(()=>{
-//     getRegistration();
-//   })
+
 
   return (
     <div className="main">
       <div className="part-two">
-        <div className="two-container">
+        <div className="two-container">{
+          messIsSuccess && <div className="MessageIsSuccess" style={{
+            color:"white",
+            
+          }}>Success</div>
+        }
           <h1>Create an account</h1>
           <p>Let's get started with your 30 days free trial.</p>
           <Formik

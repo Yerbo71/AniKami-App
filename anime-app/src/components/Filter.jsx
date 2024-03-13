@@ -1,25 +1,25 @@
-import { Box, Spinner, Checkbox, Stack, Button,Flex ,Heading} from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Spinner, Checkbox,Heading} from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
 
 const Filter = ({changeFilter}) => {
   const [filterData, setFilterData] = useState(null);
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [visibleGenres, setVisibleGenres] = useState(6);
 
-  const getData = async () => {
+  const getData = useCallback(async () => {
     try {
       const res = await fetch(`https://api.jikan.moe/v4/genres/anime`);
       const resData = await res.json();
       setFilterData(resData.data);
-      console.log(resData);
+      console.log("Filter",resData);
     } catch (error) {
       console.error("Fetching data error", error);
     }
-  };
+  }, []);
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [getData]);
 
   const handleCheckboxChange = (genre) => {
     const updatedGenres = [...selectedGenres];
